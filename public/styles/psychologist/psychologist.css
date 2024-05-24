@@ -1,0 +1,55 @@
+.psychologist_page-consultation-list-wrapper {
+    padding: 100px 20px 0 20px;
+}
+
+.psychologist_page-consultation-list-wrapper h4 {
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.psychologist_page-consultation-list-wrapper .psychologist_page-consultation-columns-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.psychologist_page-consultation-list-wrapper .psychologist_page-consultation-columns-wrapper .psychologist_page-card-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    background-color: rgba(129, 129, 129, 0.779);
+    border-radius: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.psychologist_page-consultation-list-wrapper .psychologist_page-consultation-columns-wrapper .psychologist_page-card-list-wrapper .psychologist_page-card-list-img-wrapper {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 100%;
+    margin: 10px;
+}
+
+.psychologist_page-consultation-list-wrapper .psychologist_page-consultation-columns-wrapper .psychologist_page-card-list-wrapper .psychologist_page-card-list-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   
+}
+
+.psychologist_page-consultation-list-wrapper .psychologist_page-consultation-columns-wrapper .psychologist_page-card-list-wrapper .psychologist_page-card-list-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.psychologist_page-consultation-list-wrapper .psychologist_page-consultation-columns-wrapper .psychologist_page-card-list-wrapper .psychologist_page-card-list-info-wrapper p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.psychologist_page-consultation-list-wrapper .psychologist_page-consultation-columns-wrapper .psychologist_page-card-list-wrapper .psychologist_page-card-list-info-wrapper span {
+    font-size: 15px;
+}

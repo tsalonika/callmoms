@@ -1,0 +1,243 @@
+/* Jumbotron Styling */
+.jumbotron-wrapper {
+    padding-top: 100px;
+    height: 500px;
+    background: rgb(186,215,233);
+    background: linear-gradient(180deg, rgba(186,215,233,1) 0%, rgba(255,255,255,1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jumbotron-wrapper .left_jumbotron-side p {
+    width: 350px;
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.jumbotron-wrapper .right_jumbotron-side img {
+    width: 350px;
+    height: auto;
+}
+
+/* Articles Styling */
+.articles_home-wrapper {
+    padding: 40px 20px;
+}
+
+.articles_home-wrapper h4, 
+.recommendation_home-wrapper h4, 
+.meditation_home-wrapper h4, 
+.about_service_home-content h4 {
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .article_big_card {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    height: 470px;
+    position: relative;
+    cursor: pointer;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .article_big_card p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(115, 104, 104, 0.40);
+    padding: 20px 10px;
+    font-size: 25px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .articles_right_side-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 470px;
+    gap: 10px;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .articles_right_side-wrapper .article_small_card {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .articles_right_side-wrapper .article_small_card p {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .article_home-img-big-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .article_home-img-big-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .article_home-img-small-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.articles_home-wrapper .articles_cards_home-wrapper .article_home-img-small-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Doctor Recommendation Styling */
+.recommendation_home-wrapper {
+    padding: 40px 20px;
+}
+
+.recommendation_home-wrapper .recommendation_home_cards-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.recommendation_home-wrapper .recommendation_home_cards-wrapper .recommendation_home-cards {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    box-shadow: 0px 0px 10px #e6e6e6;
+    padding: 20px;
+    gap: 10px;
+}
+
+.recommendation_home-wrapper .recommendation_home_cards-wrapper .recommendation_home-cards .recommendation_home-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    height: 100%;
+}
+
+.recommendation_home-wrapper .recommendation_home_cards-wrapper .recommendation_home-cards .recommendation_home-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recommendation_home-wrapper .recommendation_home_cards-wrapper .recommendation_home-cards .recommendation_home-right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.recommendation_home-wrapper .recommendation_home_cards-wrapper .recommendation_home-cards .recommendation_home-right-side p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.recommendation_home-wrapper .recommendation_home_cards-wrapper .recommendation_home-cards .recommendation_home-right-side a {
+    padding: 15px;
+    background-color: #598BAA;
+    border-radius: 5px;
+    color: white;
+}
+
+.view_more-wrapper {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.view_more-wrapper a {
+    background-color: #598BAA;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+}
+
+/* Lister to Meditation Styling */
+.meditation_home-wrapper {
+    padding: 40px 20px;
+}
+
+.meditation_home-wrapper .meditation_home-cards-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.meditation_home-wrapper .meditation_home-cards-wrapper .meditation_home-cards {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1.5px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+.meditation_home-wrapper .meditation_home-cards-wrapper .meditation_home-cards .recommendation_home-img-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.meditation_home-wrapper .meditation_home-cards-wrapper .meditation_home-cards .recommendation_home-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.meditation_home-wrapper .meditation_home-cards-wrapper .meditation_home-cards audio {
+    width: 100%;
+}
+
+/* About & Service Styling */
+.about_service_home-wrapper {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.about_service_home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.about_service_home-content p {
+    font-size: 17px;
+    font-weight: 400;
+    text-align: justify;
+    letter-spacing: 1.5px;
+}

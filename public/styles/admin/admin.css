@@ -1,0 +1,375 @@
+/* Approval Psychologist Page Styling */
+.admin_approval-page-wrapper {
+    padding: 100px 20px 0 20px;
+}
+
+.admin_approval-page-wrapper h4 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 35px;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper {
+    flex: 1;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper .admin_page-table-wrapper {
+    max-height: 800px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper a.admin_page-add-meditation {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgb(47, 150, 112);
+    color: white;
+    font-size: 15px;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper .admin_page-action-table i{
+    cursor: pointer;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper .admin_page-action-table i.fa-pen-to-square {
+    color: #598BAA;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper .admin_page-action-table i.fa-trash {
+    color: rgb(164, 43, 43);
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper .admin_approval-page-info-wrapper {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    background-color: rgba(89, 139, 170, 0.5);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin_approval-page-wrapper .admin_approval-page-content-wrapper .admin_approval-page-left-wrapper .admin_approval-page-info-wrapper span {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.admin_approval-page-wrapper .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+} 
+
+.admin_approval-page-wrapper .styled-table thead tr {
+    background-color: #598BAA;
+    color: #ffffff;
+    text-align: left;
+}
+
+.admin_approval-page-wrapper .styled-table th,
+.admin_approval-page-wrapper .styled-table td {
+    padding: 12px 15px;
+    font-size: 18px;
+}
+
+.admin_approval-page-wrapper .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.admin_approval-page-wrapper .styled-table tbody .admin_page-img-table-wrapper {
+    width: 150px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin_approval-page-wrapper .styled-table tbody .admin_page-img-table-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin_approval-page-wrapper .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.admin_approval-page-wrapper .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #598BAA;
+}
+
+.admin_approval-page-wrapper .styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #598BAA;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0.7;
+    }
+}
+
+.admin_approval-page-wrapper .pulse-dot-green {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+.admin_approval-page-wrapper .pulse-dot-red {
+    width: 10px;
+    height: 10px;
+    background-color: rgb(209, 51, 37);
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+} 
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); 
+    padding-top: 60px;
+    animation-duration: 0.4s;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+    animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; top: -50px; }
+    to { opacity: 1; top: 0; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; top: 0; }
+    to { opacity: 0; top: -50px; }
+}
+
+.modal.hide .modal-content {
+    animation: fadeOut 0.4s;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_detail_psychologist {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+}
+
+.img_modal-wrapper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.img_modal-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal_detail_psychologist p span {
+    background-color: rgb(146, 145, 145);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.modal_detail_psychologist p {
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.modal_detail_psychologist a {
+    color: #598BAA;
+    font-weight: 800;
+}
+
+.modal_detail_psychologist .modal_activate-toggle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Toggle Styling */
+.modal_switch-toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+  
+.modal_switch-toggle input {
+    display: none;
+}
+  
+.modal_slider-toggle {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.modal_slider-toggle:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .modal_slider-toggle {
+    background-color: #2196F3;
+}
+
+input:checked + .modal_slider-toggle:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Add meditation wrapper */
+form.admin_page-add_meditation-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wrapper input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wrapper input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wrapper input::before {
+    content: 'Select file';
+    display: inline-block;
+    background: #598BAA;
+    color: white;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    padding: 10px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+}
+
+form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wrapper input:hover::before {
+    background: #3b7ca5;
+    border-color: #0056b3;
+}
+
+form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wrapper input:active::before {
+    background: #598BAA;
+    border-color: #004085;
+}
+
+form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wrapper button {
+    background-color: #598BAA;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Button Confirmation Styling */
+.btn-confirmation {
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 5px;
+    color: white;
+}
+
+.btn-wrapper-success {
+    background-color: rgb(162, 45, 45);
+}
+
+.btn-wrapper-danger {
+    background-color: rgb(53, 53, 53);
+}

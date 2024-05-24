@@ -1,0 +1,172 @@
+/* Navbar Styling */
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Wix Madefor Display", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+.navbar-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    padding: 0px 20px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.navbar-scrolled {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-container .left_side_nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-container .left_side_nav-wrapper img {
+    width: 60px;
+    height: 60px;
+}
+
+.navbar-container .left_side_nav-wrapper span {
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.navbar-container .right_side_nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-container .right_side_nav-wrapper a {
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.navbar-container .right_side_nav-wrapper a.link_nav_sign-in {
+    background-color: #598BAA;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.navbar-container .right_side_nav-wrapper .link_nav-profile-section {
+    position: relative;
+}
+
+.navbar-container .right_side_nav-wrapper .link_nav-profile-section a.link_nav-logout {
+    display: none;
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px;
+}
+
+.navbar-container .right_side_nav-wrapper .link_nav-profile-section .link_nav_profile-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.navbar-container .right_side_nav-wrapper .link_nav-profile-section .link_nav_profile-wrapper img {
+    width: 40px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navbar-container .right_side_nav-wrapper .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar-container .right_side_nav-wrapper .dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.navbar-container .right_side_nav-wrapper .dropdown .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.navbar-container .right_side_nav-wrapper .dropdown .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.navbar-container .right_side_nav-wrapper .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Content Styling */
+.content-container {
+    
+}
+
+/* Footer Styling */
+.footer-container {
+    position: relative;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDMyMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQyIiB4MT0iMCUiIHkxPSIxMDAlIiB4Mj0iMCUiIHkyPSIwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM1YThiYWE7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2YwZjhmZjtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxwYXRoIGZpbGw9InVybCgjZ3JhZDIpIiBkPSJNMCw2NEw2MCw2OS4zQzEyMCw3NSwyNDAsODUsMzYwLDk2QzQ4MCwxMDcsNjAwLDExNyw3MjAsMTA2LjdDODQwLDk2LDk2MCw2NCwxMDgwLDUzLjNDMTIwMCw0MywxMzIwLDUzLDEzODAsNTguN0wxNDQwLDY0TDE0NDAsMzIwTDEzODAsMzIwQzEzMjAsMzIwLDEyMDAsMzIwLDEwODAsMzIwQzk2MCwzMjAsODQwLDMyMCw3MjAsMzIwQzYwMCwzMjAsNDgwLDMyMCwzNjAsMzIwQzI0MCwzMjAsMTIwLDMyMCw2MCwzMjBMMCwzMjBaIj48L3BhdGg+Cjwvc3ZnPgo=");
+    background-size: cover;
+    height: 300px;
+}
+
+.footer-container .footer-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-container .footer-wrapper p {
+    font-size: 20px;
+    font-weight: 500;
+}

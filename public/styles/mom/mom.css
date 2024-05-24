@@ -1,0 +1,140 @@
+p {
+    display: inline-block;
+}
+
+.mom_page-consultations-wrapper {
+    padding: 100px 20px 0 20px;
+}
+
+.mom_page-consultations-wrapper h4 {
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.mom_page-consultations-wrapper p.mom_page-consultations-desc {
+    font-size: 17px;
+    width: 500px;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.mom_page-consultations-wrapper h5 {
+    margin-top: 25px;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper .mom_page-consultation-cards {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 0px 10px #e6e6e6;
+    padding: 20px;
+    gap: 10px;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper .mom_page-consultation-cards .mom_page-consultation-cards-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100px;
+    height: 100%;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper .mom_page-consultation-cards .mom_page-consultation-cards-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper .mom_page-consultation-cards .mom_page-consultation-cards-right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper .mom_page-consultation-cards .mom_page-consultation-cards-right-side p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper .mom_page-consultation-cards .mom_page-consultation-cards-right-side a {
+    padding: 15px;
+    background-color: #598BAA;
+    border-radius: 5px;
+    color: white;
+}
+
+/* Forum Dialog Styling */
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 500px;
+    min-height: 500px;
+    box-shadow: 1px 1px 10px rgb(216, 213, 213);
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 25%;
+    overflow: auto;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-left-side .mom_page-consultations-card-user_menu {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    background-color: #F7F7F9;
+    box-shadow: 0px 0px 4px black;
+    cursor: pointer;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-left-side .mom_page-consultations-card-user_menu .mom_page-consultations-card-img_wrapper {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 100%;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-left-side .mom_page-consultations-card-user_menu .mom_page-consultations-card-img_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-left-side .mom_page-consultations-card-user_menu .mom_page-consultations-message_side-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-left-side .mom_page-consultations-card-user_menu .mom_page-consultations-message_side-wrapper p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-left-side .mom_page-consultations-card-user_menu .mom_page-consultations-message_side-wrapper span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-right-side {
+    width: 75%;
+}
