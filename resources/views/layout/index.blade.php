@@ -44,6 +44,7 @@
                     <div class="dropdown-content">
                         @if (isset($usersData) && $usersData['role'] === 'family')
                             <a href="{{ route('family.discussionForum') }}">Forum Diskusi</a>
+                            <a href="{{ route('mom.showConsultation') }}">Konsultasi</a>
                         @endif
                         @if (isset($usersData) && $usersData['role'] === 'mom')
                             <a href="{{ route('mom.showConsultation') }}">Konsultasi</a>
