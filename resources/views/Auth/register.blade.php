@@ -30,6 +30,14 @@
                         <span>No Telepon</span>
                         <input type="number" name="phoneNumber" placeholder="Masukkan No Telepon Anda">
                     </div>
+                    <div class="auth_page-input_text-wrapper">
+                        <span>Tempat Lahir</span>
+                        <input type="text" name="birthOfPlace" placeholder="Masukkan Tempat Lahir Anda">
+                    </div>
+                    <div class="auth_page-input_text-wrapper">
+                        <span>Tanggal Lahir</span>
+                        <input type="date" name="birthOfDate" placeholder="Tanggal Lahir Anda">
+                    </div>
                     <div class="auth_page-input_radio-wrapper">
                         <span>Peran</span>
                         <div>
@@ -79,11 +87,19 @@
                     <p class="auth_page-italic-title">*Informasi Pribadi</p>
                     <div class="auth_page-input_text-wrapper">
                         <span>Nama Lengkap</span>
-                        <input type="text" name="name" placeholder="Masukkan Nama Anda" required>
+                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama Anda" required>
                     </div>
                     <div class="auth_page-input_text-wrapper">
                         <span>No KTP</span>
-                        <input type="text" name="id_card_number" placeholder="Masukkan No KTP Anda" required>
+                        <input type="text" name="id_card_number" value="{{ old('id_card_number') }}" placeholder="Masukkan No KTP Anda" required>
+                    </div>
+                    <div class="auth_page-input_text-wrapper">
+                        <span>Tempat Lahir</span>
+                        <input type="text" name="birthOfPlace" value="{{ old('birthOfPlace') }}" placeholder="Masukkan Tempat Lahir Anda" required>
+                    </div>
+                    <div class="auth_page-input_text-wrapper">
+                        <span>Tanggal Lahir</span>
+                        <input type="date" name="birthOfDate" placeholder="Tanggal Lahir Anda" required>
                     </div>
                     <div class="auth_page-input_radio-wrapper">
                         <span>Jenis Kelamin</span>

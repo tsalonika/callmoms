@@ -10,7 +10,7 @@
 @section('content')
     {{-- Admin Page Approval Psychologist Structure --}}
     <div class="admin_approval-page-wrapper">
-        <h4>Approval Akun Psikolog</h4>
+        <h4>Kelola Meditasi</h4>
         <div class="admin_approval-page-content-wrapper">
             <div class="admin_approval-page-left-wrapper">
                 <a href="#" onclick="showModal()" class="admin_page-add-meditation">Tambahkan Meditasi &nbsp; <i class="fa-solid fa-plus"></i></a>
@@ -115,8 +115,23 @@
         </div>
     </div>
 
-    {{-- Panggil toast --}}
-    <x-toast :message="session('success')" />
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
+                iconColor: 'white',
+                customClass: {
+                    popup: 'colored-toast',
+                },
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+                title: "{{ Session::get('success') }}",
+            })
+        </script>
+    @endif
 
 @endsection
 

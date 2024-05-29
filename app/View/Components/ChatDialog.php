@@ -14,11 +14,15 @@ class ChatDialog extends Component
 
     public $getMessagesUrl;
     public $sendMessageUrl;
+    public $broadcastOn;
+    public $broadcastAs;
 
-    public function __construct(string $getMessagesUrl, string $sendMessageUrl)
+    public function __construct(string $getMessagesUrl, string $sendMessageUrl, string $broadcastOn, string $broadcastAs)
     {
         $this->getMessagesUrl = $getMessagesUrl;
         $this->sendMessageUrl = $sendMessageUrl;
+        $this->broadcastOn = $broadcastOn;
+        $this->broadcastAs = $broadcastAs;
     }
 
     /**

@@ -26,31 +26,31 @@
     <div class="articles_home-wrapper">
         <h4>Artikel</h4>
         <div class="articles_cards_home-wrapper">
-            <div class="article_big_card">
-                <div class="article_home-img-big-wrapper">
-                    <img src="{{ asset('images/article-illustration.jpg') }}" alt="Article Illustration">
-                </div>
-                <p>Text For the first article</p>
-            </div>
-            <div class="articles_right_side-wrapper">
-                <div class="article_small_card" onclick="window.location.href='/articles/1'">
-                    <div class="article_home-img-small-wrapper">
-                        <img src="{{ asset('images/article-illustration.jpg') }}" alt="Article Illustration">
+            @if ($articles->isEmpty())
+                <x-no-data />
+            @else
+                @foreach ($articles as $index => $article)
+                    @if ($index == 0)
+                    <div class="article_big_card" onclick="window.location.href='{{ url('/articles/' . $article->id) }}'">
+                        <div class="article_home-img-big-wrapper">
+                            <img src="{{ asset('storage/' . $article->image) }}" alt="Article Illustration">
+                        </div>
+                        <p>{{ $article->title }}</p>
                     </div>
-                    <p>Text For the first article</p>
-                </div>
-                <div class="article_small_card">
-                    <div class="article_home-img-small-wrapper">
-                        <img src="{{ asset('images/article-illustration.jpg') }}" alt="Article Illustration">
+                    <div class="articles_right_side-wrapper">
+                    @else
+                    <div class="article_small_card" onclick="window.location.href='{{ url('/articles/' . $article->id) }}'">
+                        <div class="article_home-img-small-wrapper">
+                            <img src="{{ asset('storage/' . $article->image) }}" alt="Article Illustration">
+                        </div>
+                        <p>{{ $article->title }}</p>
                     </div>
-                    <p>Text For the first article</p>
-                </div>
-                <div class="article_small_card">
-                    <div class="article_home-img-small-wrapper">
-                        <img src="{{ asset('images/article-illustration.jpg') }}" alt="Article Illustration">
-                    </div>
-                    <p>Text For the first article</p>
-                </div>
+                    @if ($index == count($articles) - 1)
+                        </div>
+                    @endif
+                    @endif
+                @endforeach
+            @endif
             </div>
         </div>
     </div>
@@ -60,45 +60,20 @@
         <div class="recommendation_home-wrapper">
             <h4>Rekomendasi Psikolog</h4>
             <div class="recommendation_home_cards-wrapper">
+                @foreach ($psychologists as $item)
                 <div class="recommendation_home-cards">
                     <div class="recommendation_home-img-wrapper">
-                        <img src="{{ asset('images/female-doctor-illustration.png') }}" alt="Doctor Illustration">
+                        <img src="{{ asset('storage/' . $item->photo) }}" alt="Doctor Illustration">
                     </div>
                     <div class="recommendation_home-right-side">
-                        <p>Edwin Immanuel Damanik</p>
-                        <a href="#">Konsultasi</a>
+                        <p>{{ $item->name }}</p>
+                        <a href="{{ url('/consultations/' . $item->users_id) }}">Konsultasi</a>
                     </div>
                 </div>
-                <div class="recommendation_home-cards">
-                    <div class="recommendation_home-img-wrapper">
-                        <img src="{{ asset('images/female-doctor-illustration.png') }}" alt="Doctor Illustration">
-                    </div>
-                    <div class="recommendation_home-right-side">
-                        <p>Edwin Immanuel Damanik</p>
-                        <a href="#">Konsultasi</a>
-                    </div>
-                </div>
-                <div class="recommendation_home-cards">
-                    <div class="recommendation_home-img-wrapper">
-                        <img src="{{ asset('images/female-doctor-illustration.png') }}" alt="Doctor Illustration">
-                    </div>
-                    <div class="recommendation_home-right-side">
-                        <p>Edwin Immanuel Damanik</p>
-                        <a href="#">Konsultasi</a>
-                    </div>
-                </div>
-                <div class="recommendation_home-cards">
-                    <div class="recommendation_home-img-wrapper">
-                        <img src="{{ asset('images/female-doctor-illustration.png') }}" alt="Doctor Illustration">
-                    </div>
-                    <div class="recommendation_home-right-side">
-                        <p>Edwin Immanuel Damanik</p>
-                        <a href="#">Konsultasi</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="view_more-wrapper">
-                <a href="#">Lihat Selengkapnya</a>
+                <a href="{{ url('/consultations') }}">Lihat Selengkapnya</a>
             </div>
         </div>
     @endif
@@ -107,42 +82,21 @@
     <div class="meditation_home-wrapper">
         <h4>Dengarkan Musik Meditasi</h4>
         <div class="meditation_home-cards-wrapper">
-            <div class="meditation_home-cards">
-                <div class="recommendation_home-img-wrapper">
-                    <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-                </div>
-                <audio controls>
-                    <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-            <div class="meditation_home-cards">
-                <div class="recommendation_home-img-wrapper">
-                    <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-                </div>
-                <audio controls>
-                    <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-            <div class="meditation_home-cards">
-                <div class="recommendation_home-img-wrapper">
-                    <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-                </div>
-                <audio controls>
-                    <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-            <div class="meditation_home-cards">
-                <div class="recommendation_home-img-wrapper">
-                    <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-                </div>
-                <audio controls>
-                    <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
+            @if ($meditations->isEmpty())
+                <x-no-data />
+            @else
+                @foreach ($meditations as $item)
+                    <div class="meditation_home-cards">
+                        <div class="recommendation_home-img-wrapper">
+                            <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="Meditation Illustration">
+                        </div>
+                        <audio controls>
+                            <source src="{{ asset('storage/' . $item->music) }}" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                @endforeach
+            @endif
         </div>
         <div class="view_more-wrapper">
             <a href="{{ url('/meditations') }}">Lihat Selengkapnya</a>

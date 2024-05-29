@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('styles/layout/layout.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            toolbar_mode: 'floating',
+            toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | outdent indent',
+            height: 300,
+            menubar: false
+        });
+    </script>
     @stack('styles')
     <title>@yield('title')</title>
 </head>
@@ -32,20 +43,25 @@
                     <a href="#">Layanan Khusus</a>
                     <div class="dropdown-content">
                         @if (isset($usersData) && $usersData['role'] === 'family')
-                            <a href="#">Forum Diskusi</a>
+                            <a href="{{ route('family.discussionForum') }}">Forum Diskusi</a>
                         @endif
                         @if (isset($usersData) && $usersData['role'] === 'mom')
                             <a href="{{ route('mom.showConsultation') }}">Konsultasi</a>
                         @elseif (isset($usersData) && $usersData['role'] === 'psychologist')
                             <a href="{{ route('pyschologist.messageWithMom') }}">Konsultasi</a>
+                        @elseif((!isset($usersData)))
+                            <a href="{{ url('/login') }}">Konsultasi</a>
+                            <a href="{{ url('/login') }}">Forum Diskusi</a>
                         @endif
                     </div>
                 </div>
                 @if (isset($usersData) && $usersData['role'] === 'mom')
-                    <a href="#">Catatan Emosi</a>
+                    <a href="{{ url('/emotional-notes') }}">Catatan Emosi</a>
                 @endif
                 <a href="{{ url('/meditations') }}">Meditasi</a>
-                <a href="#">Profil</a>
+                @if (isset($usersData))
+                    <a href="{{ url('/profile') }}">Profil</a>
+                @endif
                 @if (isset($usersData))
                     <div class="link_nav-profile-section">
                         <div class="link_nav_profile-wrapper" onclick="showLogout()">
@@ -67,6 +83,19 @@
             <p>© Copyright Calmoms | Institut Teknologi Del</p>
         </div>
     </div>
+    @if (Session::has('errorSession'))
+        <script>
+            Swal.fire({
+                icon: "warning",
+                title: "Peringatan",
+                text: "{{ Session::get('errorSession') }}",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/login';
+                }
+            });
+        </script>
+    @endif
 </body>
 </html>
 

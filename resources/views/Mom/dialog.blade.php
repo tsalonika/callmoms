@@ -29,8 +29,10 @@
                 @php
                     $getMessagesUrl = url('/messages');
                     $sendMessageUrl = url('/send');
+                    $broadcastOn = 'my-channel-chat';
+                    $broadcastAs = 'my-event-chat';
                 @endphp
-                <x-chat-dialog :getMessagesUrl="$getMessagesUrl" :sendMessageUrl="$sendMessageUrl" />
+                <x-chat-dialog :getMessagesUrl="$getMessagesUrl" :sendMessageUrl="$sendMessageUrl" :broadcastOn="$broadcastOn" :broadcastAs="$broadcastAs" />
             </div>
         </div>
     </div>

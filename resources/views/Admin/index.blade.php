@@ -86,7 +86,7 @@
             modalBody.innerHTML = `
                 <div class="modal_detail_psychologist">
                     <p><span>Nomor KTP</span> ${data.id_card_number}</p>
-                    <p><span>Sekolah</span> ${data.school}</p>
+                    <p><span>Institusi Pendidikan</span> ${data.school}</p>
                     <p><span>Tahun Kelulusan</span> ${data.graduated_year}</p>
                     <p><span>Nomor STRP</span> ${data.strp_number}</p>
                     <p><span>Ijazah</span> <a href="{{ asset('storage/${data.certificate}') }}" target="_blank">Lihat Ijazah</a></p>

@@ -22,18 +22,19 @@
         var recipientId = urlParts[urlParts.length - 1];
         
         var userId = '{{ session('users_data')['id'] ?? null }}';
+        var userName = '{{ session('users_data')['nested']['name'] ?? null }}';
 
         var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
             cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
         });
 
-        var channel = pusher.subscribe('my-channel-chat');
+        var channel = pusher.subscribe('{{ $broadcastOn }}');
 
-        channel.bind('my-event-chat', function(data) {
+        channel.bind('{{ $broadcastAs }}', function(data) {
             displayMessage(data.message);
         });
 
-        $.get('{{ $getMessagesUrl }}/' + recipientId, function(data) {
+        $.get('{{ $getMessagesUrl }}' + ('{{ $getMessagesUrl }}' === '{{ url('/messages') }}' ? '/' + recipientId : ''), function(data) {
             data.forEach(function(message) {
                 displayMessage(message);
             });
@@ -43,7 +44,12 @@
             var backgroundColor = message.from == userId ? '#6BA5C8' : '#FFFFFF';
             var positionChat = message.from == userId ? 'flex-end' : 'flex-start';
             var messageContent = '<p class="box-message ' + '" style="background-color: ' + backgroundColor + '; align-self: ' + positionChat + ';">' + message.content + '</p>';
-            $('#chat').append(messageContent);
+            var messageContentForum = '<p class="box-message ' + '" style="background-color: ' + backgroundColor + '; align-self: ' + positionChat + '; display: flex; flex-direction: column; font-weight: 400; gap: 5px; align-items: ' + positionChat + ' ">' + '<label style="font-weight: 700;">' + message.name +'</label>' + message.content + '</p>';
+            if(('{{ $broadcastOn }}') === 'my-channel-chat') {
+                $('#chat').append(messageContent);
+            } else {
+                $('#chat').append(messageContentForum);
+            }
             $('#chat').scrollTop($('#chat')[0].scrollHeight);
         }
 
@@ -52,8 +58,9 @@
             var formData = new FormData(this);
             formData.append('_token', $('input[name="_token"]').val());
             formData.append('to', recipientId);
+            formData.append('name', userName);
             $.ajax({
-                url: '/send',
+                url: '{{ $sendMessageUrl }}',
                 method: 'POST',
                 data: formData,
                 processData: false,
