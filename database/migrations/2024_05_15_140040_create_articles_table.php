@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('image');
-            $table->string('content');
+            $table->text('content');
             $table->bigInteger('creator_id')->unsigned();
             $table->timestamps();
             $table->foreign('creator_id')->references('id')->on('psychologists')->onDelete('cascade');

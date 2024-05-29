@@ -1,0 +1,88 @@
+/* Profile Styling */
+.profile_page-wrapper {
+    padding: 100px 20px 0 20px;
+}
+
+.profile_page-wrapper h4 {
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.profile_page-wrapper .profile_page-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.profile_page-wrapper .profile_page-cards-wrapper .profile_page-input-section-wrapper {
+    width: 400px;
+    height: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.profile_page-picture-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile_page-picture-wrapper p {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.profile_page-picture-wrapper .profile_page-picture-circle-wrapper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.profile_page-picture-wrapper .profile_page-picture-circle-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile_page-input-type-wrapper {
+    padding: 10px 0;
+}
+
+.profile_page-input-type-wrapper input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgb(62, 61, 61);
+    border-radius: 2px;
+    outline: none;
+}
+
+.profile_page-input-type-wrapper input[type="file"] {
+    display: none;
+}
+
+.profile_page-input-type-wrapper label {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgb(62, 61, 61);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.profile_page-input-type-wrapper button {
+    padding: 10px;
+    background-color: #BAD7E9;
+    border: 1px solid rgb(62, 61, 61);
+    border-radius: 100px;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}

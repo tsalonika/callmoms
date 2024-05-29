@@ -36,6 +36,8 @@ p {
     box-shadow: 0px 0px 10px #e6e6e6;
     padding: 20px;
     gap: 10px;
+    width: 400px;
+    height: 200px;
 }
 
 .mom_page-consultations-wrapper .mom_page-consultation-cards-wrapper .mom_page-consultation-cards .mom_page-consultation-cards-img-wrapper {
@@ -137,4 +139,45 @@ p {
 
 .mom_page-consultations-wrapper .mom_page-consultations-dialog-wrapper .mom_page-consultations-dialog-right-side {
     width: 75%;
+}
+
+/* Catatan Emosi Styling */
+.catatan_emosi-page-wrapper {
+    padding: 100px 20px 0 20px;
+}
+
+.catatan_emosi-page-wrapper form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.catatan_emosi-page-wrapper label {
+    font-weight: 600;
+}
+
+.catatan_emosi-page-wrapper .catatan_emosi-options-wrapper {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.catatan_emosi-page-wrapper form .catatan_emosi-button-wrapper {
+    text-align: right;
+}
+
+.catatan_emosi-page-wrapper form .catatan_emosi-button-wrapper button {
+    padding: 10px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #598BAA;
+    color: white;
+    border: none;
+}
+
+.question-label {
+    cursor: pointer;
 }

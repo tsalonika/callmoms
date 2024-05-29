@@ -373,3 +373,8 @@ form.admin_page-add_meditation-wrapper .admin_page-add_meditation-form-group-wra
 .btn-wrapper-danger {
     background-color: rgb(53, 53, 53);
 }
+
+/* Toast Color */
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}

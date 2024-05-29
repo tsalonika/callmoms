@@ -9,6 +9,7 @@ use App\Models\Psychologist;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -91,6 +92,8 @@ class AuthController extends Controller
                 'name' => 'required|string|max:255',
                 'role' => 'required|string|in:mom,family',
                 'address' => 'required|string|max:255',
+                'birthOfDate' => 'required|date',
+                'birthOfPlace' => 'required|string',
                 'photo' => 'required|image',
                 'phoneNumber' => 'required|string|max:255',
                 'password' => 'required|string',
@@ -113,6 +116,8 @@ class AuthController extends Controller
             $user->role = $request->role;
             $user->phoneNumber = $request->phoneNumber;
             $user->password = bcrypt($request->password);
+            $user->birthOfDate = $request->birthOfDate;
+            $user->birthOfPlace = $request->birthOfPlace;
 
             $user->save();
 
@@ -146,12 +151,15 @@ class AuthController extends Controller
     public function postPsychologist(Request $request)
     {
         try {
+
             $rules = [
                 'name' => 'required|string|max:255',
                 'id_card_number' => 'required|string|max:255',
                 'gender' => 'required|string|in:male,female',
                 'address' => 'required|string|max:255',
                 'photo' => 'required|image',
+                'birthOfDate' => 'required|string',
+                'birthOfPlace' => 'required|string',
                 'phoneNumber' => 'required|string|max:255',
                 'school' => 'required|string|max:255',
                 'graduated_year' => 'required|integer|min:1900|max:' . date('Y'),
@@ -179,6 +187,8 @@ class AuthController extends Controller
             $user->role = 'psychologist';
             $user->phoneNumber = $request->phoneNumber;
             $user->password = bcrypt($request->password);
+            $user->birthOfDate = $request->birthOfDate;
+            $user->birthOfPlace = $request->birthOfPlace;
 
             $user->save();
 
@@ -209,5 +219,89 @@ class AuthController extends Controller
         $request->session()->forget('users_data');
         return redirect('/login');
     }
+
+    // Profile function
+    public function showProfile()
+    {
+        return view('Auth.profile');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $user = User::find($request->id);
+
+            $rules = [
+                'name' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
+                'birthOfDate' => 'required|string',
+                'birthOfPlace' => 'required|string',
+                'phoneNumber' => 'required|string|max:255',
+            ];
+            if ($request->phoneNumber !== $user->phoneNumber) {
+                $rules['phoneNumber'] .= '|unique:users,phoneNumber';
+            }
+            
+            $request->validate($rules);
+
+            $user->phoneNumber = $request->phoneNumber;
+            $user->birthOfDate = $request->birthOfDate;
+            $user->birthOfPlace = $request->birthOfPlace;
+
+            if ($request->password) {
+                $user->password = bcrypt($request->password);
+            }
+
+            $user->save();
+
+            $userData = $user->toArray();
+
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('profile-photos', 'public');
+            }
+            
+            if($request->role === 'psychologist') {
+                $psychologist = Psychologist::where('users_id', $user->id)->first();
+                $psychologist->name = $request->name;
+                $psychologist->photo = $photoPath ?? $psychologist->photo;
+                $psychologist->address = $request->address;
+                $psychologist->save();
+
+                $psychologistData = $user->psychologist;
+                $userData['nested'] = $psychologistData->toArray();
+            }
+
+            if($request->role === 'mom') {
+                $mom = Mom::where('users_id', $user->id)->first();
+                $mom->name = $request->name;
+                $mom->photo = $photoPath ?? $mom->photo;
+                $mom->address = $request->address;
+                $mom->save();
+
+                $momData = $user->mom;
+                $userData['nested'] = $momData->toArray();
+            }
+
+            if($request->role === 'family') {
+                $family = Family::where('users_id', $user->id)->first();
+                $family->name = $request->name;
+                $family->photo = $photoPath ?? $family->photo;
+                $family->address = $request->address;
+                $family->save();
+
+                $familyData = $user->family;
+                $userData['nested'] = $familyData->toArray();
+            }
+
+
+            session(['users_data' => $userData]);
+
+            return redirect()->back()->with('success', 'Perbarui Profil berhasil!');
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
 
 }

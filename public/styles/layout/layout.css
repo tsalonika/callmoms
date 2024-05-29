@@ -10,6 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 100vh;
 }
 
 * {
@@ -169,4 +170,10 @@ p, h1, h2, h3, h4, h5, h6 {
 .footer-container .footer-wrapper p {
     font-size: 20px;
     font-weight: 500;
+}
+
+.swal2-confirm {
+    background-color: #598BAA !important;
+    color: #fff !important;
+    font-weight: bold !important;
 }

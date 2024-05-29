@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('phoneNumber')->unique();
             $table->enum('role', ['mom', 'family', 'psychologist', 'admin']);
             $table->string('password');
+            $table->date('birthOfDate');
+            $table->string('birthOfPlace');
             $table->timestamps();
         });
     }

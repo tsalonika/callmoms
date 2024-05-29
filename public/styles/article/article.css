@@ -1,12 +1,13 @@
 /* Articles Page Styling */
-.articles_page-wrapper {
+.article_page-container-wrapper {
     padding: 100px 20px 0 20px;
+}
+
+.articles_page-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     gap: 15px;
-    justify-content: space-between;
 }
 
 .articles_page-wrapper .articles_page-card {
@@ -96,4 +97,23 @@
 
 .detail_article_page-content-wrapper a:hover {
     text-decoration: underline;
+}
+
+.detail_article_page-content-wrapper .detail_article_page-creator-wrapper {
+    background-color: rgb(133, 133, 133);
+    display: inline-block;
+    color: white;
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+.articles_page-btn-operate {
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: rgb(141, 203, 141);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    letter-spacing: 1px;
 }

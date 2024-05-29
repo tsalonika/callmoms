@@ -9,104 +9,20 @@
 @section('content')
     {{-- Meditation Page Structure --}}
     <div class="meditation_page-wrapper">
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="meditation_page-card">
-            <div class="meditation_page-img-wrapper">
-                <img src="{{ asset('images/meditation.png') }}" alt="Meditation Illustration">
-            </div>
-            <audio controls>
-                <source src="/path/to/your/audio/file.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
+        @if ($meditations->isEmpty())
+            <x-no-data />
+        @else
+            @foreach ($meditations as $item)
+                <div class="meditation_page-card">
+                    <div class="meditation_page-img-wrapper">
+                        <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="Meditation Illustration">
+                    </div>
+                    <audio controls>
+                        <source src="{{ asset('storage/' . $item->music) }}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            @endforeach
+        @endif
     </div>
 @endsection

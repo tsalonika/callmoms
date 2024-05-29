@@ -30,6 +30,8 @@ class CreateAdminUser extends Command
             'phoneNumber' => '081234567890',
             'role' => 'admin',
             'password' => bcrypt('katasandi123'),
+            'birthOfDate' => '2001-10-27',
+            'birthOfPlace' => 'Pematangsiantar'
         ]);
 
         $this->info('Admin user created successfully');

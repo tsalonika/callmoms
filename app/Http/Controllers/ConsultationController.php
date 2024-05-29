@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ForumDiscussionSent;
 use App\Events\PrivateMessageSent;
+use App\Models\Forum;
 use App\Models\Message;
 use App\Models\Psychologist;
 use App\Models\User;
@@ -105,6 +107,28 @@ class ConsultationController extends Controller
                 'photo' => $relatedMom->photo,
                 'last_message_timestamp' => $lastMessage ? $lastMessage->created_at : null,
                 'last_message_content' => $lastMessage ? $lastMessage->content : null,
+                'type' => 'mom',
+            ];
+
+            $result[] = $objectData;
+        }
+
+        $relatedFamilies = DB::table('families')->whereIn('users_id', $relatedUserIds)->get();
+
+        foreach($relatedFamilies as $relatedFamily) {
+            $lastMessage = DB::table('messages')->where(function ($query) use ($userId, $relatedFamily) {
+                $query->where('from', $userId)->where('to', $relatedFamily->users_id);
+            })->orWhere(function ($query) use ($userId, $relatedFamily) {
+                $query->where('from', $relatedFamily->users_id)->where('to', $userId);
+            })->orderBy('created_at', 'desc')->first();
+
+            $objectData = (object)[
+                'id' => $relatedFamily->users_id,
+                'name' => $relatedFamily->name,
+                'photo' => $relatedFamily->photo,
+                'last_message_timestamp' => $lastMessage ? $lastMessage->created_at : null,
+                'last_message_content' => $lastMessage ? $lastMessage->content : null,
+                'type' => 'family',
             ];
 
             $result[] = $objectData;
@@ -116,5 +140,33 @@ class ConsultationController extends Controller
     public function showDialogMessageWithMom($id)
     {
         return view('Psychologist.dialog');
+    }
+
+    // Show Discussion Forum
+    public function showDiscussionForum()
+    {
+        return view('Family.index');
+    }
+
+    // Get Messages From Discussion Forum
+    public function getMessagesDiscussionForum() 
+    {
+        $messages = DB::table('forums')->get();
+        return response()->json($messages);
+    }
+
+    // Send Messages to Forum
+    public function sendMessageDiscussion(Request $request) {
+        $userId = session()->has('users_data') ? session()->get('users_data')['id'] : null;
+
+        $message = new Forum();
+        $message->from = $userId;
+        $message->content = $request->content;
+        $message->name = $request->name;
+        $message->save();
+
+        event(new ForumDiscussionSent($message));
+
+        return response()->json(['status' => 'Message Sent!', 'message' => $message]);
     }
 }

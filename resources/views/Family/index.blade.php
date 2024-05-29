@@ -13,10 +13,10 @@
         <h4>Konsultasi</h4>
         <div class="mom_page-consultations-dialog-wrapper">
             @php
-                $getMessagesUrl = url('/messages');
-                $sendMessageUrl = url('/send');
-                $broadcastOn = 'my-channel-chat';
-                $broadcastAs = 'my-event-chat';
+                $getMessagesUrl = url('/messages-forum');
+                $sendMessageUrl = url('/send-forum');
+                $broadcastOn = 'my-channel-forum';
+                $broadcastAs = 'my-event-forum';
             @endphp
             <x-chat-dialog :getMessagesUrl="$getMessagesUrl" :sendMessageUrl="$sendMessageUrl" :broadcastOn="$broadcastOn" :broadcastAs="$broadcastAs" />
         </div>
