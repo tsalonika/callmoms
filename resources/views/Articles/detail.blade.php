@@ -1,6 +1,10 @@
+@php
+    $title = 'Calmoms - ' . $article_detail->title;
+@endphp
+
 @extends('layout.index')
 
-@section('title', 'Calmoms - DISINI NANTI JUDUL BERITA')
+@section('title', $title)
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('styles/article/article.css') }}">

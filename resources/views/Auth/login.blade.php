@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('styles/auth/auth.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Calmoms - Masuk</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 </head>
 <body>
     {{-- Get Data from Session --}}
