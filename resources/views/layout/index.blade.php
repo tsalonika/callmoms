@@ -66,6 +66,9 @@
                 @if ((isset($usersData) && $usersData['role'] !== 'admin'))
                     <a href="{{ url('/profile') }}">Profil</a>
                 @endif
+                @if (isset($usersData) && $usersData['role'] === 'admin')
+                    <a href="{{ url('/approval-page') }}">Aktivasi</a>
+                @endif
                 @if (isset($usersData))
                     <div class="link_nav-profile-section">
                         <div class="link_nav_profile-wrapper" onclick="showLogout()">
