@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -234,14 +235,15 @@ class AuthController extends Controller
             $rules = [
                 'name' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
-                'birthOfDate' => 'required|string',
+                'birthOfDate' => 'required|date',
                 'birthOfPlace' => 'required|string',
                 'phoneNumber' => 'required|string|max:255',
             ];
+
             if ($request->phoneNumber !== $user->phoneNumber) {
                 $rules['phoneNumber'] .= '|unique:users,phoneNumber';
             }
-            
+
             $request->validate($rules);
 
             $user->phoneNumber = $request->phoneNumber;
@@ -257,10 +259,13 @@ class AuthController extends Controller
             $userData = $user->toArray();
 
             if ($request->hasFile('photo')) {
-                $photoPath = $request->file('photo')->store('profile-photos', 'public');
+                $file = $request->file('photo');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/profile-photos'), $filename);
+                $photoPath = 'profile-photos/' . $filename;
             }
-            
-            if($request->role === 'psychologist') {
+
+            if ($request->role === 'psychologist') {
                 $psychologist = Psychologist::where('users_id', $user->id)->first();
                 $psychologist->name = $request->name;
                 $psychologist->photo = $photoPath ?? $psychologist->photo;
@@ -271,7 +276,7 @@ class AuthController extends Controller
                 $userData['nested'] = $psychologistData->toArray();
             }
 
-            if($request->role === 'mom') {
+            if ($request->role === 'mom') {
                 $mom = Mom::where('users_id', $user->id)->first();
                 $mom->name = $request->name;
                 $mom->photo = $photoPath ?? $mom->photo;
@@ -282,7 +287,7 @@ class AuthController extends Controller
                 $userData['nested'] = $momData->toArray();
             }
 
-            if($request->role === 'family') {
+            if ($request->role === 'family') {
                 $family = Family::where('users_id', $user->id)->first();
                 $family->name = $request->name;
                 $family->photo = $photoPath ?? $family->photo;
@@ -293,7 +298,6 @@ class AuthController extends Controller
                 $userData['nested'] = $familyData->toArray();
             }
 
-
             session(['users_data' => $userData]);
 
             return redirect()->back()->with('success', 'Perbarui Profil berhasil!');
@@ -302,6 +306,4 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-
-
 }

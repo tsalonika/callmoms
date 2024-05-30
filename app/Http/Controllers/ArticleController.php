@@ -65,9 +65,11 @@ class ArticleController extends Controller
             $article = Article::findOrFail($request->id);
 
             if ($request->hasFile('image')) {
-                Storage::disk('public')->delete($article->image);
-                $image = $request->file('image')->store('articles', 'public');
-                $article->image = $image;
+                $file = $request->file('image');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/articles'), $filename);
+                $imagePath = 'articles/' . $filename;
+                $article->image = $imagePath;
             }
 
             $article->title = $request->title;

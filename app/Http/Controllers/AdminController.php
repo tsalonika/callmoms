@@ -7,6 +7,7 @@ use App\Models\Psychologist;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -78,15 +79,28 @@ class AdminController extends Controller
             ]);
     
             $meditation = Meditation::findOrFail($request->id);
+
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/profile-photos'), $filename);
+                $photoPath = 'profile-photos/' . $filename;
+            }
     
             if ($request->hasFile('thumbnail')) {
-                $thumbnail = $request->file('thumbnail')->store('thumbnails', 'public');
-                $meditation->thumbnail = $thumbnail;
+                $file = $request->file('thumbnail');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/thumbnails'), $filename);
+                $thumbnailPath = 'thumbnails/' . $filename;
+                $meditation->thumbnail = $thumbnailPath;
             }
     
             if ($request->hasFile('music')) {
-                $music = $request->file('music')->store('musics', 'public');
-                $meditation->music = $music;
+                $file = $request->file('music');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/musics'), $filename);
+                $musicPath = 'musics/' . $filename;
+                $meditation->music = $musicPath;
             }
     
             $meditation->save();

@@ -22,6 +22,7 @@
     </script>
     @stack('styles')
     <title>@yield('title')</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 </head>
 <body>
     {{-- Get Data from Session --}}
@@ -39,28 +40,30 @@
             <div class="right_side_nav-wrapper">
                 <a href="{{ url('/') }}">Beranda</a>
                 <a href="{{ url('/articles') }}">Artikel</a>
-                <div class="dropdown">
-                    <a href="#">Layanan Khusus</a>
-                    <div class="dropdown-content">
-                        @if (isset($usersData) && $usersData['role'] === 'family')
-                            <a href="{{ route('family.discussionForum') }}">Forum Diskusi</a>
-                            <a href="{{ route('mom.showConsultation') }}">Konsultasi</a>
-                        @endif
-                        @if (isset($usersData) && $usersData['role'] === 'mom')
-                            <a href="{{ route('mom.showConsultation') }}">Konsultasi</a>
-                        @elseif (isset($usersData) && $usersData['role'] === 'psychologist')
-                            <a href="{{ route('pyschologist.messageWithMom') }}">Konsultasi</a>
-                        @elseif((!isset($usersData)))
-                            <a href="{{ url('/login') }}">Konsultasi</a>
-                            <a href="{{ url('/login') }}">Forum Diskusi</a>
-                        @endif
+                @if (!isset($usersData) || (isset($usersData) && $usersData['role'] !== 'admin'))
+                    <div class="dropdown">
+                        <a href="#">Layanan Khusus</a>
+                        <div class="dropdown-content">
+                            @if (isset($usersData) && $usersData['role'] === 'family')
+                                <a href="{{ route('family.discussionForum') }}">Forum Diskusi</a>
+                                <a href="{{ route('mom.showConsultation') }}">Konsultasi</a>
+                            @endif
+                            @if (isset($usersData) && $usersData['role'] === 'mom')
+                                <a href="{{ route('mom.showConsultation') }}">Konsultasi</a>
+                            @elseif (isset($usersData) && $usersData['role'] === 'psychologist')
+                                <a href="{{ route('pyschologist.messageWithMom') }}">Konsultasi</a>
+                            @elseif((!isset($usersData)))
+                                <a href="{{ url('/login') }}">Konsultasi</a>
+                                <a href="{{ url('/login') }}">Forum Diskusi</a>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endif
                 @if (isset($usersData) && $usersData['role'] === 'mom')
                     <a href="{{ url('/emotional-notes') }}">Catatan Emosi</a>
                 @endif
                 <a href="{{ url('/meditations') }}">Meditasi</a>
-                @if (isset($usersData))
+                @if ((isset($usersData) && $usersData['role'] !== 'admin'))
                     <a href="{{ url('/profile') }}">Profil</a>
                 @endif
                 @if (isset($usersData))
