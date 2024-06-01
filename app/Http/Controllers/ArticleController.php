@@ -18,8 +18,8 @@ class ArticleController extends Controller
 
     public function getById($id)
     {
-        $article_detail = DB::table('articles')->where('id', $id)->first();
-        $creator = DB::table('psychologists')->where('id', $article_detail->creator_id)->first();
+        $article_detail = DB::table('articles')->where('id_articles', $id)->first();
+        $creator = DB::table('psychologists')->where('id_psychologists', $article_detail->creator_id)->first();
         return view('Articles.detail', compact('article_detail', 'creator'));
     }
 

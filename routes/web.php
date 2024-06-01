@@ -56,7 +56,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/operate-meditation', [AdminController::class, 'showMeditation']);
     Route::post('/add-meditation', [AdminController::class, 'addMeditation'])->name('admin.addMeditation');
     Route::post('/edit-meditation', [AdminController::class, 'editMeditation'])->name('admin.editMeditation');
-    Route::get('/delete-meditation/{id}', [AdminController::class, 'deleteMeditation'])->name('admin.deleteMeditation');
+    Route::delete('/delete-meditation/{id}', [AdminController::class, 'deleteMeditation'])->name('admin.deleteMeditation');
 });
 
 // Moms ROUTES

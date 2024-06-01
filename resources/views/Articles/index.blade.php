@@ -23,7 +23,7 @@
                 <x-no-data />
             @else
                 @foreach ($articles as $item)
-                    <div class="articles_page-card" onclick="window.location.href='{{ url('/articles/' . $item->id) }}'">
+                    <div class="articles_page-card" onclick="window.location.href='{{ url('/articles/' . $item->id_articles) }}'">
                         <div class="articles_page-img-wrapper">
                             <img src="{{ asset('storage/' . $item->image) }}" alt="Article Illustration">
                         </div>

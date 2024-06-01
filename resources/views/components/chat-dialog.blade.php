@@ -21,7 +21,7 @@
         var urlParts = window.location.pathname.split('/');
         var recipientId = urlParts[urlParts.length - 1];
         
-        var userId = '{{ session('users_data')['id'] ?? null }}';
+        var userId = '{{ session('users_data')['id_users'] ?? null }}';
         var userName = '{{ session('users_data')['nested']['name'] ?? null }}';
 
         var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {

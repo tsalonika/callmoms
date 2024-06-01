@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
         $psychologists = Psychologist::with('user')->get()->map(function ($psychologist) {
             return [
-                'id' => $psychologist->id,
+                'id' => $psychologist->id_psychologists,
                 'name' => $psychologist->name,
                 'id_card_number' => $psychologist->id_card_number,
                 'gender' => $psychologist->gender,
@@ -73,19 +73,12 @@ class AdminController extends Controller
     public function editMeditation(Request $request) {
         try {
             $request->validate([
-                'id' => 'required|exists:meditations,id',
+                'id_meditations' => 'required|exists:meditations,id_meditations',
                 'thumbnail' => 'nullable|image',
                 'music' => 'nullable|file',
             ]);
     
-            $meditation = Meditation::findOrFail($request->id);
-
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('storage/profile-photos'), $filename);
-                $photoPath = 'profile-photos/' . $filename;
-            }
+            $meditation = Meditation::findOrFail($request->id_meditations);
     
             if ($request->hasFile('thumbnail')) {
                 $file = $request->file('thumbnail');

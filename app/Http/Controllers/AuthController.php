@@ -266,7 +266,7 @@ class AuthController extends Controller
             }
 
             if ($request->role === 'psychologist') {
-                $psychologist = Psychologist::where('users_id', $user->id)->first();
+                $psychologist = Psychologist::where('users_id', $user->id_users)->first();
                 $psychologist->name = $request->name;
                 $psychologist->photo = $photoPath ?? $psychologist->photo;
                 $psychologist->address = $request->address;
@@ -277,7 +277,7 @@ class AuthController extends Controller
             }
 
             if ($request->role === 'mom') {
-                $mom = Mom::where('users_id', $user->id)->first();
+                $mom = Mom::where('users_id', $user->id_users)->first();
                 $mom->name = $request->name;
                 $mom->photo = $photoPath ?? $mom->photo;
                 $mom->address = $request->address;
@@ -288,7 +288,7 @@ class AuthController extends Controller
             }
 
             if ($request->role === 'family') {
-                $family = Family::where('users_id', $user->id)->first();
+                $family = Family::where('users_id', $user->id_users)->first();
                 $family->name = $request->name;
                 $family->photo = $photoPath ?? $family->photo;
                 $family->address = $request->address;

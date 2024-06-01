@@ -10,7 +10,7 @@
     <div class="psychologist_page-consultation-list-wrapper">
         <h4>Daftar Konsultasi Ibu</h4>
         @if (empty($result))
-            <p class="empty_cards_message-wrapper">Anda Belum Memiliki Konsultasi dengan Ibu</p>
+            <p class="empty_cards_message-wrapper">Anda Belum Memiliki Konsultasi dengan Ibu atau Keluarga</p>
         @else
             @foreach ($result as $item)
                 <div class="psychologist_page-consultation-columns-wrapper"onclick="window.location.href='{{ url('/consultation-list/' . $item->id) }}'">
