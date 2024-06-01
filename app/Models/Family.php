@@ -9,8 +9,10 @@ class Family extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_families';
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class, 'users_id', 'id_users');
     }
 }

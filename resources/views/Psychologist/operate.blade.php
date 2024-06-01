@@ -11,7 +11,7 @@
     {{-- Get Data from Session --}}
     @php
         $usersData = session('users_data');
-        $psychologistID = isset($usersData['nested']['id']) ? $usersData['nested']['id'] : '-';
+        $psychologistID = isset($usersData['nested']['id_psychologists']) ? $usersData['nested']['id_psychologists'] : '-';
     @endphp
 
     {{-- Operate Articles View for psychologist --}}
@@ -28,7 +28,7 @@
                     @if ($psychologistID == $item->creator_id)
                         <div class="psychologist_menu-wrapper">
                             <i class="fa-solid fa-pen-to-square psychologist_menu-edit" onclick="showModalEditArticle({{ json_encode($item) }})"></i>
-                            <i class="fa-solid fa-trash psychologist_menu-delete" onclick="showModalDelete({{ $item->id }})"></i>
+                            <i class="fa-solid fa-trash psychologist_menu-delete" onclick="showModalDelete({{ $item->id_articles }})"></i>
                         </div>
                     @endif
                 </div>
@@ -136,7 +136,7 @@
         function showModalEditArticle(item) {
             console.log('Showing edit modal with item:', item);
             myModalEditArticle.style.display = "block";
-            document.getElementById('edit-id').value = item['id'];
+            document.getElementById('edit-id').value = item['id_articles'];
             document.getElementById('title').value = item['title'];
             document.getElementById('edit-image-preview').src = `{{ asset('storage') }}/${item['image']}`;
             tinymce.get('edit-content').setContent(item['content']);
@@ -190,11 +190,35 @@
                     })
                     .then(data => {
                         // Show success toast
-                        showToast('Berhasil Menghapus Meditasi', 'success');
+                        Swal.fire({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            iconColor: 'white',
+                            customClass: {
+                                popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 3000,
+                            title: "Berhasil Menghapus Artikel",
+                        })
                     })
                     .catch(error => {
                         // Show error toast
-                        showToast('Gagal Menghapus Meditasi', 'error');
+                        Swal.fire({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            iconColor: 'white',
+                            customClass: {
+                                popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 3000,
+                            title: "Gagal Menghapus Artikel",
+                        })
                         console.error('There was an error!', error);
                     });
                 }

@@ -41,7 +41,7 @@
                                     </td>
                                     <td class="admin_page-action-table">
                                         <i class="fa-solid fa-pen-to-square" onclick="showModalEdit({{ json_encode($item) }})"></i>
-                                        <i class="fa-solid fa-trash" onclick="showModalDelete({{ $item->id }})"></i>
+                                        <i class="fa-solid fa-trash" onclick="showModalDelete({{ $item->id_meditations }})"></i>
                                     </td>
                                 </tr>
                             @endforeach
@@ -87,7 +87,7 @@
                 {{-- This is the form Edit --}}
                 <form action="{{ route('admin.editMeditation') }}" method="POST" enctype="multipart/form-data" class="admin_page-add_meditation-wrapper">
                     @csrf
-                    <input type="hidden" name="id" id="edit-id">
+                    <input type="hidden" name="id_meditations" id="edit-id">
                     <div class="admin_page-add_meditation-form-group-wrapper">
                         <label>Current Thumbnail:</label>
                         <img id="edit-thumbnail-preview" src="" alt="Current Thumbnail" style="max-width: 100px;">
@@ -150,7 +150,7 @@
 
         function showModalEdit(item) {
             modalEdit.style.display = "block";
-            document.getElementById('edit-id').value = item.id;
+            document.getElementById('edit-id').value = item.id_meditations;
             document.getElementById('edit-thumbnail-preview').src = `{{ asset('storage') }}/${item.thumbnail}`;
             document.getElementById('edit-music-preview').src = `{{ asset('storage') }}/${item.music}`;
         }
@@ -187,6 +187,7 @@
             }).then((result) => {
                 if(result.isConfirmed) {
                     fetch(`/delete-meditation/${id}`, {
+                        method: 'DELETE', // Ubah dari GET ke DELETE
                         headers: {
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -194,24 +195,49 @@
                     })
                     .then(response => {
                         if (response.ok) {
-                            // Reload the page
-                            window.location.reload();
                             return response.json();
                         }
                         throw new Error('Network response was not ok.');
                     })
                     .then(data => {
                         // Show success toast
-                        showToast('Berhasil Menghapus Meditasi', 'success');
+                        Swal.fire({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            iconColor: 'white',
+                            customClass: {
+                                popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 3000,
+                            title: "Berhasil Menghapus Meditasi",
+                        })
+                        // Optionally, you can reload the page or remove the deleted item from the table
+                        window.location.reload(); // reload the page to update the table
                     })
                     .catch(error => {
                         // Show error toast
-                        showToast('Gagal Menghapus Meditasi', 'error');
+                        Swal.fire({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'error',
+                            iconColor: 'white',
+                            customClass: {
+                                popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 3000,
+                            title: "Gagal Menghapus Meditasi",
+                        });
                         console.error('There was an error!', error);
                     });
                 }
             });
         }
+
 
     </script>
 @endpush

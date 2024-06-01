@@ -9,6 +9,8 @@ class Meditation extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_meditations';
+
     protected $fillable = [
         'thumbnail',
         'music',

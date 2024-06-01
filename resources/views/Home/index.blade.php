@@ -31,7 +31,7 @@
             @else
                 @foreach ($articles as $index => $article)
                     @if ($index == 0)
-                    <div class="article_big_card" onclick="window.location.href='{{ url('/articles/' . $article->id) }}'">
+                    <div class="article_big_card" onclick="window.location.href='{{ url('/articles/' . $article->id_articles) }}'">
                         <div class="article_home-img-big-wrapper">
                             <img src="{{ asset('storage/' . $article->image) }}" alt="Article Illustration">
                         </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="articles_right_side-wrapper">
                     @else
-                    <div class="article_small_card" onclick="window.location.href='{{ url('/articles/' . $article->id) }}'">
+                    <div class="article_small_card" onclick="window.location.href='{{ url('/articles/' . $article->id_articles) }}'">
                         <div class="article_home-img-small-wrapper">
                             <img src="{{ asset('storage/' . $article->image) }}" alt="Article Illustration">
                         </div>

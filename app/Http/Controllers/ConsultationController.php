@@ -22,7 +22,7 @@ class ConsultationController extends Controller
 
     public function showDialogMessage($id) 
     {
-        $userId = session()->has('users_data') ? session()->get('users_data')['id'] : null;
+        $userId = session()->has('users_data') ? session()->get('users_data')['id_users'] : null;
 
         $psychologists = DB::table('psychologists')->where('status', 'active')->get();
         $result = [];
@@ -52,7 +52,7 @@ class ConsultationController extends Controller
 
     public function getMessages($recipientId) 
     {
-        $userId = session()->has('users_data') ? session()->get('users_data')['id'] : null;
+        $userId = session()->has('users_data') ? session()->get('users_data')['id_users'] : null;
 
         $chatId = $userId < $recipientId ? $userId . '-' . $recipientId : $recipientId . '-' . $userId;
         $messages = DB::table('messages')->where('chat_id', $chatId)->get();
@@ -60,7 +60,7 @@ class ConsultationController extends Controller
     }
 
     public function sendMessages(Request $request) {
-        $userId = session()->has('users_data') ? session()->get('users_data')['id'] : null;
+        $userId = session()->has('users_data') ? session()->get('users_data')['id_users'] : null;
         $recipientId = $request->to;
 
         $chatId = $userId < $recipientId ? $userId . '-' . $recipientId : $recipientId . '-' . $userId;
@@ -79,7 +79,7 @@ class ConsultationController extends Controller
     // Psychologist Controller for Consultation
     public function messagesWithMom()
     {
-        $userId = session()->has('users_data') ? session()->get('users_data')['id'] : null;
+        $userId = session()->has('users_data') ? session()->get('users_data')['id_users'] : null;
 
         $messages = DB::table('messages')
                     ->where('from', $userId)
@@ -157,7 +157,7 @@ class ConsultationController extends Controller
 
     // Send Messages to Forum
     public function sendMessageDiscussion(Request $request) {
-        $userId = session()->has('users_data') ? session()->get('users_data')['id'] : null;
+        $userId = session()->has('users_data') ? session()->get('users_data')['id_users'] : null;
 
         $message = new Forum();
         $message->from = $userId;
