@@ -119,7 +119,6 @@ class AuthController extends Controller
             $user->password = bcrypt($request->password);
             $user->birthOfDate = $request->birthOfDate;
             $user->birthOfPlace = $request->birthOfPlace;
-
             $user->save();
 
             if ($request->role === 'family') {
@@ -128,7 +127,7 @@ class AuthController extends Controller
                 $family->gender = $request->gender;
                 $family->address = $request->address;
                 $family->photo = $photoPath;
-                $family->users_id = $user->id;
+                $family->users_id = $user->id_users;
                 $family->save();
             } else if ($request->role === 'mom') {
                 $patient = new Mom;
@@ -138,7 +137,7 @@ class AuthController extends Controller
                 $patient->photo = $photoPath;
                 $patient->children_num = $request->children_num;
                 $patient->year_marriage = $request->year_marriage;
-                $patient->users_id = $user->id;
+                $patient->users_id = $user->id_users;
                 $patient->save();
             }
 
@@ -205,7 +204,7 @@ class AuthController extends Controller
             $psychologist->strp_number = $request->strp_number;
             $psychologist->strp = $strpPath;
             $psychologist->status = 'inactive';
-            $psychologist->users_id = $user->id;
+            $psychologist->users_id = $user->id_users;
             $psychologist->save();
 
             return redirect()->back()->with('success', 'Registrasi berhasil! Silahkan Tunggu Aktivasi Akun dari Admin');
