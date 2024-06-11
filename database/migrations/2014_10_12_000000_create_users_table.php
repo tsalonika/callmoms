@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id_users');
             $table->string('phoneNumber')->unique();
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->string('name');
+            $table->enum('gender', ['male', 'female']);
+            $table->string('address');
+            $table->string('photo');
             $table->enum('role', ['mom', 'family', 'psychologist', 'admin']);
             $table->string('password');
             $table->date('birthOfDate');

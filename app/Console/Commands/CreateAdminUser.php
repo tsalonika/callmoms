@@ -27,6 +27,12 @@ class CreateAdminUser extends Command
     public function handle()
     {
         User::create([
+            'username' => 'admin',
+            'name' => 'Admin User',
+            'address' => 'Jalan Semangka',
+            'gender' => 'male',
+            'email' => 'admin@gmail.com',
+            'photo' => '',
             'phoneNumber' => '081234567890',
             'role' => 'admin',
             'password' => bcrypt('katasandi123'),

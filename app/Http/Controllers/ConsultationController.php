@@ -6,6 +6,7 @@ use App\Events\ForumDiscussionSent;
 use App\Events\PrivateMessageSent;
 use App\Models\Forum;
 use App\Models\Message;
+use App\Models\Mom;
 use App\Models\Psychologist;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,13 @@ class ConsultationController extends Controller
     // Mom Controller for Consultation
     public function showPsychologists()
     {
-        $psychologists = DB::table('psychologists')->where('status', 'active')->get();
+        $psychologists = Psychologist::with('user')->where('status', 'active')->get()->map(function ($psychologist) {
+            return [
+                'users_id' => $psychologist->users_id,
+                'photo' => $psychologist->user->photo,
+                'name' => $psychologist->user->name,
+            ];
+        });
         return view('Mom.index', compact('psychologists'));
     }
 
@@ -24,28 +31,28 @@ class ConsultationController extends Controller
     {
         $userId = session()->has('users_data') ? session()->get('users_data')['id_users'] : null;
 
-        $psychologists = DB::table('psychologists')->where('status', 'active')->get();
+        $psychologists = Psychologist::with('user')->where('status', 'active')->get();
         $result = [];
 
-        foreach($psychologists as $psychologist) {
+        foreach ($psychologists as $psychologist) {
             $lastMessage = DB::table('messages')->where(function ($query) use ($userId, $psychologist) {
                 $query->where('from', $userId)->where('to', $psychologist->users_id);
             })->orWhere(function ($query) use ($userId, $psychologist) {
                 $query->where('from', $psychologist->users_id)->where('to', $userId);
             })->orderBy('created_at', 'desc')->first();
-
+    
             $objectData = (object)[
                 'id' => $psychologist->users_id,
-                'name' => $psychologist->name,
-                'photo' => $psychologist->photo,
+                'name' => $psychologist->user->name,
+                'photo' => $psychologist->user->photo,
                 'last_message_timestamp' => $lastMessage ? $lastMessage->created_at : null,
                 'last_message_content' => $lastMessage ? $lastMessage->content : null,
             ];
-
+    
             $result[] = $objectData;
         }
 
-        $psychologistName = DB::table('psychologists')->where('users_id', $id)->first();
+        $psychologistName = Psychologist::with('user')->where('users_id', $id)->first();
         
         return view('Mom.dialog', compact('result', 'psychologistName'));
     }
@@ -92,7 +99,7 @@ class ConsultationController extends Controller
 
         $result = [];
 
-        $relatedMoms = DB::table('moms')->whereIn('users_id', $relatedUserIds)->get();
+        $relatedMoms = Mom::with('user')->whereIn('users_id', $relatedUserIds)->get();
 
         foreach($relatedMoms as $relatedMom) {
             $lastMessage = DB::table('messages')->where(function ($query) use ($userId, $relatedMom) {
@@ -103,8 +110,8 @@ class ConsultationController extends Controller
 
             $objectData = (object)[
                 'id' => $relatedMom->users_id,
-                'name' => $relatedMom->name,
-                'photo' => $relatedMom->photo,
+                'name' => $relatedMom->user->name,
+                'photo' => $relatedMom->user->photo,
                 'last_message_timestamp' => $lastMessage ? $lastMessage->created_at : null,
                 'last_message_content' => $lastMessage ? $lastMessage->content : null,
                 'type' => 'mom',
@@ -113,17 +120,17 @@ class ConsultationController extends Controller
             $result[] = $objectData;
         }
 
-        $relatedFamilies = DB::table('families')->whereIn('users_id', $relatedUserIds)->get();
+        $relatedFamilies = DB::table('users')->whereIn('id_users', $relatedUserIds)->where('role', 'family')->get();
 
         foreach($relatedFamilies as $relatedFamily) {
             $lastMessage = DB::table('messages')->where(function ($query) use ($userId, $relatedFamily) {
-                $query->where('from', $userId)->where('to', $relatedFamily->users_id);
+                $query->where('from', $userId)->where('to', $relatedFamily->id_users);
             })->orWhere(function ($query) use ($userId, $relatedFamily) {
-                $query->where('from', $relatedFamily->users_id)->where('to', $userId);
+                $query->where('from', $relatedFamily->id_users)->where('to', $userId);
             })->orderBy('created_at', 'desc')->first();
 
             $objectData = (object)[
-                'id' => $relatedFamily->users_id,
+                'id' => $relatedFamily->id_users,
                 'name' => $relatedFamily->name,
                 'photo' => $relatedFamily->photo,
                 'last_message_timestamp' => $lastMessage ? $lastMessage->created_at : null,

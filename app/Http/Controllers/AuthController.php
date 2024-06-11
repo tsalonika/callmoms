@@ -26,14 +26,14 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'phoneNumber' => 'required',
+                'username' => 'required',
                 'password' => 'required',
             ]);
 
-            $user = User::where('phoneNumber', $request->phoneNumber)->first();
+            $user = User::where('username', $request->username)->first();
 
             if(!$user || !Hash::check($request->password, $user->password)) {
-                return back()->with('error', 'Nomor Telepon atau Kata Sandi yang Anda Coba Salah');
+                return back()->with('error', 'Username atau Kata Sandi yang Anda Coba Salah');
             }
 
             $userData = $user->toArray();
@@ -60,17 +60,6 @@ class AuthController extends Controller
                 $userData['nested'] = $mom->toArray();
             }
 
-            // Check if user is Family
-            if($user->role === 'family') {
-                $family = $user->family;
-
-                if(!$family) {
-                    return back()->with('error', 'Nomor Telepon atau Kata Sandi yang Anda Coba Salah');
-                }
-
-                $userData['nested'] = $family->toArray();
-            }
-
             session(['users_data' => $userData]);
 
             return redirect()->back()->with('success', 'Berhasil');
@@ -88,14 +77,18 @@ class AuthController extends Controller
     // Send Family or Mom new Data
     public function postUser(Request $request)
     {
+
+        $photoPath = null;
+
         try {
             $rules = [
                 'name' => 'required|string|max:255',
                 'role' => 'required|string|in:mom,family',
+                'username' => 'required|string|unique:users,username',
+                'email' => 'required|string|unique:users,email',
                 'address' => 'required|string|max:255',
                 'birthOfDate' => 'required|date',
                 'birthOfPlace' => 'required|string',
-                'photo' => 'required|image',
                 'phoneNumber' => 'required|string|max:255',
                 'password' => 'required|string',
             ];
@@ -110,31 +103,33 @@ class AuthController extends Controller
             $request->validate($rules);
 
             if ($request->hasFile('photo')) {
-                $photoPath = $request->file('photo')->store('profile-photos', 'public');
+                $file = $request->file('photo');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/profile-photos'), $filename);
+                $photoPath = 'profile-photos/' . $filename;
             }
 
             $user = new User;
             $user->role = $request->role;
             $user->phoneNumber = $request->phoneNumber;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->name = $request->name;
+            if($request->role === 'mom') {
+                $user->gender = 'female';
+            } else {
+                $user->gender = $request->gender;
+            }
+            $user->address = $request->address;
+            $user->photo = $photoPath;
             $user->password = bcrypt($request->password);
             $user->birthOfDate = $request->birthOfDate;
             $user->birthOfPlace = $request->birthOfPlace;
             $user->save();
 
-            if ($request->role === 'family') {
-                $family = new Family;
-                $family->name = $request->name;
-                $family->gender = $request->gender;
-                $family->address = $request->address;
-                $family->photo = $photoPath;
-                $family->users_id = $user->id_users;
-                $family->save();
-            } else if ($request->role === 'mom') {
+            
+            if ($request->role === 'mom') {
                 $patient = new Mom;
-                $patient->name = $request->name;
-                $patient->gender = 'female';
-                $patient->address = $request->address;
-                $patient->photo = $photoPath;
                 $patient->children_num = $request->children_num;
                 $patient->year_marriage = $request->year_marriage;
                 $patient->users_id = $user->id_users;
@@ -143,6 +138,9 @@ class AuthController extends Controller
 
             return redirect()->back()->with('success', 'Registrasi berhasil!');
         } catch (\Exception $e) {
+            if ($photoPath) {
+                unlink(public_path('storage/' . $photoPath));
+            }
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
@@ -150,12 +148,18 @@ class AuthController extends Controller
     // Send Psychologist new Data
     public function postPsychologist(Request $request)
     {
-        try {
 
+        $photoPath = null;
+        $certificatePath = null;
+        $strpPath = null;
+
+        try {
             $rules = [
                 'name' => 'required|string|max:255',
                 'id_card_number' => 'required|string|max:255',
                 'gender' => 'required|string|in:male,female',
+                'username' => 'required|string|unique:users,username',
+                'email' => 'required|string|unique:users,email',
                 'address' => 'required|string|max:255',
                 'photo' => 'required|image',
                 'birthOfDate' => 'required|string',
@@ -172,32 +176,42 @@ class AuthController extends Controller
             $request->validate($rules);
 
             if ($request->hasFile('photo')) {
-                $photoPath = $request->file('photo')->store('profile-photos', 'public');
+                $file = $request->file('photo');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/profile-photos'), $filename);
+                $photoPath = 'profile-photos/' . $filename;
             }
 
             if ($request->hasFile('certificate')) {
-                $certificatePath = $request->file('certificate')->store('certificates', 'public');
+                $file = $request->file('certificate');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/certificates'), $filename);
+                $certificatePath = 'certificates/' . $filename;
             }
 
             if ($request->hasFile('strp')) {
-                $strpPath = $request->file('strp')->store('strp', 'public');
+                $file = $request->file('strp');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/strp'), $filename);
+                $strpPath = 'strp/' . $filename;
             }
             
             $user = new User;
             $user->role = 'psychologist';
             $user->phoneNumber = $request->phoneNumber;
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->photo = $photoPath;
+            $user->address = $request->address;
+            $user->gender = $request->gender;
             $user->password = bcrypt($request->password);
             $user->birthOfDate = $request->birthOfDate;
             $user->birthOfPlace = $request->birthOfPlace;
-
             $user->save();
 
             $psychologist = new Psychologist;
-            $psychologist->name = $request->name;
             $psychologist->id_card_number = $request->id_card_number;
-            $psychologist->gender = $request->gender;
-            $psychologist->address = $request->address;
-            $psychologist->photo = $photoPath;
             $psychologist->school = $request->school;
             $psychologist->graduated_year = $request->graduated_year;
             $psychologist->certificate = $certificatePath;
@@ -209,6 +223,15 @@ class AuthController extends Controller
 
             return redirect()->back()->with('success', 'Registrasi berhasil! Silahkan Tunggu Aktivasi Akun dari Admin');
         } catch (\Exception $e) {
+            if ($photoPath) {
+                unlink(public_path('storage/' . $photoPath));
+            }
+            if ($certificatePath) {
+                unlink(public_path('storage/' . $certificatePath));
+            }
+            if ($strpPath) {
+                unlink(public_path('storage/' . $strpPath));
+            }
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
@@ -228,80 +251,82 @@ class AuthController extends Controller
 
     public function updateProfile(Request $request)
     {
+        $photoPath = null;
+
         try {
             $user = User::find($request->id);
-
+            
             $rules = [
                 'name' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
                 'birthOfDate' => 'required|date',
                 'birthOfPlace' => 'required|string',
                 'phoneNumber' => 'required|string|max:255',
+                'username' => 'required|string|max:255',
+                'email' => 'required|string|max:255',
             ];
 
             if ($request->phoneNumber !== $user->phoneNumber) {
                 $rules['phoneNumber'] .= '|unique:users,phoneNumber';
             }
 
+            if ($request->username !== $user->username) {
+                $rules['username'] .= '|unique:users,username';
+            }
+
             $request->validate($rules);
 
             $user->phoneNumber = $request->phoneNumber;
+            $user->username = $request->username;
+            $user->email = $request->email;
             $user->birthOfDate = $request->birthOfDate;
             $user->birthOfPlace = $request->birthOfPlace;
+            $user->name = $request->name;
+            $user->address = $request->address;
+            $user->gender = $user->gender;
 
             if ($request->password) {
                 $user->password = bcrypt($request->password);
+            }
+
+            if ($request->hasFile('photo')) {
+
+                if($user->photo) {
+                    $oldPhotoPath = public_path('storage/' . $user->photo);
+                    if(file_exists($oldPhotoPath)) {
+                        unlink($oldPhotoPath);
+                    }
+                }
+
+                $file = $request->file('photo');
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/profile-photos'), $filename);
+                $photoPath = 'profile-photos/' . $filename;
+                $user->photo = $photoPath;
             }
 
             $user->save();
 
             $userData = $user->toArray();
 
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('storage/profile-photos'), $filename);
-                $photoPath = 'profile-photos/' . $filename;
-            }
-
             if ($request->role === 'psychologist') {
-                $psychologist = Psychologist::where('users_id', $user->id_users)->first();
-                $psychologist->name = $request->name;
-                $psychologist->photo = $photoPath ?? $psychologist->photo;
-                $psychologist->address = $request->address;
-                $psychologist->save();
-
                 $psychologistData = $user->psychologist;
                 $userData['nested'] = $psychologistData->toArray();
             }
 
             if ($request->role === 'mom') {
-                $mom = Mom::where('users_id', $user->id_users)->first();
-                $mom->name = $request->name;
-                $mom->photo = $photoPath ?? $mom->photo;
-                $mom->address = $request->address;
-                $mom->save();
-
                 $momData = $user->mom;
                 $userData['nested'] = $momData->toArray();
             }
-
-            if ($request->role === 'family') {
-                $family = Family::where('users_id', $user->id_users)->first();
-                $family->name = $request->name;
-                $family->photo = $photoPath ?? $family->photo;
-                $family->address = $request->address;
-                $family->save();
-
-                $familyData = $user->family;
-                $userData['nested'] = $familyData->toArray();
-            }
-
             session(['users_data' => $userData]);
 
             return redirect()->back()->with('success', 'Perbarui Profil berhasil!');
             
         } catch (\Exception $e) {
+            if ($photoPath) {
+                unlink(public_path('storage/' . $photoPath));
+            }
+
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }

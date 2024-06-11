@@ -19,16 +19,16 @@
             <div class="profile_page-input-section-wrapper">
                 <div class="profile_page-picture-wrapper">
                     <div class="profile_page-picture-circle-wrapper">
-                        <img src="{{ asset('storage/' . $usersData['nested']['photo']) }}" alt="Profile Picture">
+                        <img src="{{ asset('storage/' . $usersData['photo']) }}" alt="Profile Picture">
                     </div>
-                    <p>{{ $usersData['nested']['name'] }}</p>
+                    <p>{{ $usersData['name'] }}</p>
                 </div>
                 <form action="{{ route('updateProfile') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="role" value="{{ $usersData['role'] }}">
-                    <input type="hidden" name="id" value="{{ $usersData['nested']['users_id'] }}">
+                    <input type="hidden" name="id" value="{{ $usersData['id_users'] }}">
                     <div class="profile_page-input-type-wrapper">
-                        <input type="text" name="name" value="{{ $usersData['nested']['name'] }}" placeholder="Masukkan Nama Lengkap" required>
+                        <input type="text" name="name" value="{{ $usersData['name'] }}" placeholder="Masukkan Nama Lengkap" required>
                     </div>
                     <div class="profile_page-input-type-wrapper">
                         <input type="text" name="birthOfPlace" value="{{ $usersData['birthOfPlace'] }}" placeholder="Masukkan Tempat Lahir" required>
@@ -40,7 +40,13 @@
                         <input type="text" name="phoneNumber" value="{{ $usersData['phoneNumber'] }}" placeholder="Masukkan Nomor Telepon" required>
                     </div>
                     <div class="profile_page-input-type-wrapper">
-                        <input type="text" name="address" value="{{ $usersData['nested']['address'] }}" placeholder="Masukkan Alamat" required>
+                        <input type="text" name="address" value="{{ $usersData['address'] }}" placeholder="Masukkan Alamat" required>
+                    </div>
+                    <div class="profile_page-input-type-wrapper">
+                        <input type="text" name="username" value="{{ $usersData['username'] }}" placeholder="Masukkan Username Baru (Opsional)">
+                    </div>
+                    <div class="profile_page-input-type-wrapper">
+                        <input type="text" name="email" value="{{ $usersData['email'] }}" placeholder="Masukkan Email Baru (Opsional)">
                     </div>
                     <div class="profile_page-input-type-wrapper">
                         <input type="password" name="password" placeholder="Masukkan Password Baru (Opsional)">

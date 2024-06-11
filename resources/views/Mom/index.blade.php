@@ -16,11 +16,11 @@
             @foreach ($psychologists as $item)
                 <div class="mom_page-consultation-cards">
                     <div class="mom_page-consultation-cards-img-wrapper">
-                        <img src="{{ asset('storage/' . $item->photo) }}" alt="Doctor Illustration">
+                        <img src="{{ asset('storage/' . $item['photo']) }}" alt="Doctor Illustration">
                     </div>
                     <div class="mom_page-consultation-cards-right-side">
-                        <p>{{ $item->name }}</p>
-                        <a href="{{ url('/consultations/' . $item->users_id) }}">Konsultasi</a>
+                        <p>{{ $item['name'] }}</p>
+                        <a href="{{ url('/consultations/' . $item['users_id']) }}">Konsultasi</a>
                     </div>
                 </div>
             @endforeach

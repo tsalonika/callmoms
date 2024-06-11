@@ -21,6 +21,12 @@ class User extends Authenticatable
     protected $primaryKey = 'id_users';
 
     protected $fillable = [
+        'username',
+        'name',
+        'address',
+        'email',
+        'gender',
+        'photo',
         'phoneNumber',
         'role',
         'password',
@@ -56,10 +62,5 @@ class User extends Authenticatable
     public function mom()
     {
         return $this->hasOne(Mom::class, 'users_id');
-    }
-
-    public function family()
-    {
-        return $this->hasOne(Family::class, 'users_id');
     }
 }

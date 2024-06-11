@@ -63,11 +63,11 @@
                 @foreach ($psychologists as $item)
                 <div class="recommendation_home-cards">
                     <div class="recommendation_home-img-wrapper">
-                        <img src="{{ asset('storage/' . $item->photo) }}" alt="Doctor Illustration">
+                        <img src="{{ asset('storage/' . $item['photo']) }}" alt="Doctor Illustration">
                     </div>
                     <div class="recommendation_home-right-side">
-                        <p>{{ $item->name }}</p>
-                        <a href="{{ url('/consultations/' . $item->users_id) }}">Konsultasi</a>
+                        <p>{{ $item['name'] }}</p>
+                        <a href="{{ url('/consultations/' . $item['users_id']) }}">Konsultasi</a>
                     </div>
                 </div>
                 @endforeach

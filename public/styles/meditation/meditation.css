@@ -1,12 +1,16 @@
 /* Meditation Page Styling */
-.meditation_page-wrapper {
+.meditation_page-container {
     padding: 100px 20px 0 20px;
+}
+
+.meditation_page-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     gap: 15px;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 .meditation_page-wrapper .meditation_page-card {
@@ -37,4 +41,37 @@
 .meditation_page-wrapper .meditation_page-card audio {
     width: 100%;
     margin-top: 10px;
+}
+
+.meditation_page-card .source-youtube {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Tips & Trcik Styling */
+.meditation_page-tips_trick_banner-wrapper p {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 100px;
+    background-color: none;
+    border: 1px solid #000000;
+}
+
+.meditation_page-column-tips-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.meditation_page-column-items-wrapper h4 {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.meditation_page-column-items-wrapper p {
+    font-size: 14px;
+    text-align: justify;
+    text-indent: 15px;
 }
