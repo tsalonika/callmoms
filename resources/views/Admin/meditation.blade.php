@@ -71,6 +71,10 @@
                         <input type="file" name="music" required>
                     </div>
                     <div class="admin_page-add_meditation-form-group-wrapper">
+                        <label>Sumber:</label>
+                        <input type="text" name="source" placeholder="contoh: https://youtube.com/..." required>
+                    </div>
+                    <div class="admin_page-add_meditation-form-group-wrapper">
                         <button type="submit">Submit</button>
                     </div>
                 </form>
@@ -106,6 +110,10 @@
                     <div class="admin_page-add_meditation-form-group-wrapper">
                         <label>New Music (optional):</label>
                         <input type="file" name="music">
+                    </div>
+                    <div class="admin_page-add_meditation-form-group-wrapper">
+                        <label>Sumber:</label>
+                        <input type="text" name="source" id="source" placeholder="contoh: https://youtube.com/..." required>
                     </div>
                     <div class="admin_page-add_meditation-form-group-wrapper">
                         <button type="submit">Submit</button>
@@ -153,6 +161,7 @@
             document.getElementById('edit-id').value = item.id_meditations;
             document.getElementById('edit-thumbnail-preview').src = `{{ asset('storage') }}/${item.thumbnail}`;
             document.getElementById('edit-music-preview').src = `{{ asset('storage') }}/${item.music}`;
+            document.getElementById('source').value = `${item.source}`;
         }
 
         function closeModalEdit() {

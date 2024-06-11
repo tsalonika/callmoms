@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id_messages');
-            $table->string('from');
-            $table->string('to');
+            $table->bigInteger('from')->unsigned();
+            $table->bigInteger('to')->unsigned();
             $table->text('content');
             $table->string('chat_id');
+            $table->foreign('from')->references('id_users')->on('users')->onDelete('cascade');
+            $table->foreign('to')->references('id_users')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

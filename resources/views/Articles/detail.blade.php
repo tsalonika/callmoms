@@ -20,7 +20,7 @@
         </div>
         <div class="detail_article_page-content-wrapper">
             <div class="detail_article_page-creator-wrapper">
-                Kreator <i class="fa-solid fa-pen-nib"></i> : {{ $creator->name }}
+                Kreator <i class="fa-solid fa-pen-nib"></i> : {{ $creatorName->name }}
             </div>
             {!! $article_detail->content !!}
         </div>

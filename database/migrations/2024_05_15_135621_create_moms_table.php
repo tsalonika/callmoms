@@ -13,10 +13,6 @@ return new class extends Migration
     {
         Schema::create('moms', function (Blueprint $table) {
             $table->bigIncrements('id_moms');
-            $table->string('name');
-            $table->string('gender');
-            $table->string('address');
-            $table->string('photo');
             $table->string('children_num');
             $table->integer('year_marriage');
             $table->bigInteger('users_id')->unsigned();

@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="psychologist_page-consultation-list-wrapper">
-        <h4>Daftar Konsultasi Ibu</h4>
+        <h4>Daftar Konsultasi</h4>
         @if (empty($result))
             <p class="empty_cards_message-wrapper">Anda Belum Memiliki Konsultasi dengan Ibu atau Keluarga</p>
         @else

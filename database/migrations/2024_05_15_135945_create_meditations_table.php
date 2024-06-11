@@ -15,6 +15,9 @@ return new class extends Migration
             $table->bigIncrements('id_meditations');
             $table->string('thumbnail');
             $table->string('music');
+            $table->bigInteger('creator_id')->unsigned();
+            $table->string('source');
+            $table->foreign('creator_id')->references('id_users')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

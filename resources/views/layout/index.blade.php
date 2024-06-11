@@ -28,7 +28,9 @@
     {{-- Get Data from Session --}}
     @php
         $usersData = session('users_data');
-        $profileImage = isset($usersData['nested']['photo']) ? asset('storage/' . $usersData['nested']['photo']) : asset('images/admin-illustration.png');
+        $profileImage = isset($usersData['photo']) && $usersData['photo'] !== '' 
+            ? asset('storage/' . $usersData['photo']) 
+            : asset('images/admin-illustration.png');
     @endphp
 
     <div class="mega-container">

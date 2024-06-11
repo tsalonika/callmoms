@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('psychologists', function (Blueprint $table) {
             $table->bigIncrements('id_psychologists');
-            $table->string('name');
             $table->string('id_card_number');
-            $table->enum('gender', ['male', 'female']);
-            $table->string('address');
-            $table->string('photo');
             $table->string('school');
             $table->string('graduated_year');
             $table->string('certificate');

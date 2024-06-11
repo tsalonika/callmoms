@@ -29,8 +29,8 @@
             <form action="" method="POST">
                 @csrf
                 <div class="auth_page-input_text-wrapper">
-                    <span>No Telepon</span>
-                    <input type="number" name="phoneNumber" placeholder="Masukkan No Telepon Anda" required>
+                    <span>Username</span>
+                    <input type="text" name="username" placeholder="Masukkan Username Anda" required>
                 </div>
                 <div class="auth_page-input_text-wrapper">
                     <span>Password</span>
@@ -41,6 +41,7 @@
         </div>
         <div class="auth_page-bottom-text">
             <p>Belum memiliki akun? <a href="{{ url('/register') }}">Daftar Disini</a></p>
+            <a href="{{ route('password.request') }}" class="forgot-password">Lupa Kata Sandi</a>
         </div>
         @if (Session::has('success'))
             <script>
@@ -53,6 +54,16 @@
                         window.location.href = '{{ $redirectUrl }}';
                     }
                 });
+            </script>
+        @endif
+
+        @if (Session::has('successEmail'))
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "Sukses",
+                    text: "{{ Session::get('successEmail') }}",
+                })
             </script>
         @endif
 

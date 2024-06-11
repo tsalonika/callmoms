@@ -74,6 +74,14 @@
                         <input type="number" name="year_marriage" placeholder="Masukkan Tahun Menikah Anda" required>
                     </div>
                     <div class="auth_page-input_text-wrapper">
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="Masukkan Email Anda" required>
+                    </div>
+                    <div class="auth_page-input_text-wrapper">
+                        <span>Username</span>
+                        <input type="text" name="username" placeholder="Masukkan Username Anda" required>
+                    </div>
+                    <div class="auth_page-input_text-wrapper">
                         <span>Password</span>
                         <input type="password" name="password" placeholder="Masukkan Sandi Anda" required>
                     </div>
@@ -144,6 +152,14 @@
                     <div class="auth_page-input_file-wrapper">
                         <span>Surat Tanda Registrasi Psikolog</span>
                         <input type="file" name="strp" required>
+                    </div>
+                    <div class="auth_page-input_text-wrapper">
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="Masukkan Email Anda" required>
+                    </div>
+                    <div class="auth_page-input_text-wrapper">
+                        <span>Username</span>
+                        <input type="text" name="username" placeholder="Masukkan Username Anda" required>
                     </div>
                     <div class="auth_page-input_text-wrapper">
                         <span>Password</span>

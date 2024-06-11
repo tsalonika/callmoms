@@ -7,6 +7,7 @@ use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\EmotionalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MeditationController;
+use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,7 @@ Route::get('/articles/{id}', [ArticleController::class, 'getById']);
 Route::get('/meditations', [MeditationController::class, 'index']);
 
 // Login
-Route::get('/login', [AuthController::class, 'showLogin']);
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'proceedLogin']);
 
 // Register
@@ -75,6 +76,12 @@ Route::middleware('multi_role:mom,family')->group(function () {
     Route::get('/consultations', [ConsultationController::class, 'showPsychologists'])->name('mom.showConsultation');
     Route::get('/consultations/{id}', [ConsultationController::class, 'showDialogMessage']);
 });
+
+// Reset Password
+Route::get('password/reset', [PasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [PasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [PasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [PasswordController::class, 'reset'])->name('password.update');
 
 // Psychologist ROUTES
 Route::middleware(['role:psychologist'])->group(function () {

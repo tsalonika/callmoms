@@ -22,7 +22,7 @@
         var recipientId = urlParts[urlParts.length - 1];
         
         var userId = '{{ session('users_data')['id_users'] ?? null }}';
-        var userName = '{{ session('users_data')['nested']['name'] ?? null }}';
+        var userName = '{{ session('users_data')['name'] ?? null }}';
 
         var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
             cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
